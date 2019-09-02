@@ -17,8 +17,8 @@ from model.faster_rcnn.faster_rcnn import _fasterRCNN
 import pdb
 
 class vgg16(_fasterRCNN):
-  def __init__(self, classes, pretrained=False, class_agnostic=False):
-    self.model_path = '/local/scratch/ccc53/faster-rcnn.pytorch/data/pretrained_model/vgg16_caffe.pth'
+  def __init__(self, classes, pretrained=False, class_agnostic=False, path):
+    self.model_path = path
     self.dout_base_model = 512
     self.pretrained = pretrained
     self.class_agnostic = class_agnostic

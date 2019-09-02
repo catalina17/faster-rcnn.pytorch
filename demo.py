@@ -15,7 +15,7 @@ import numpy as np
 from model.faster_rcnn.vgg16 import vgg16
 
 
-def get_frcnn_feature_extractor():
+def get_frcnn_feature_extractor(path):
   pascal_classes = np.asarray(['__background__',
                        'aeroplane', 'bicycle', 'bird', 'boat',
                        'bottle', 'bus', 'car', 'cat', 'chair',
@@ -23,7 +23,7 @@ def get_frcnn_feature_extractor():
                        'motorbike', 'person', 'pottedplant',
                        'sheep', 'sofa', 'train', 'tvmonitor'])
   fasterRCNN = vgg16(pascal_classes, pretrained=True)
-  fasterRCNN.create_architecture()
+  fasterRCNN.create_architecture(path)
   print('Loaded pre-trained Faster R-CNN model successfully!')
   print(fasterRCNN.RCNN_base[:10])
 
