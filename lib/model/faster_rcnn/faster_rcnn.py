@@ -7,14 +7,14 @@ import torchvision.models as models
 from torch.autograd import Variable
 import numpy as np
 from model.utils.config import cfg
-from model.rpn.rpn import _RPN
-from model.roi_pooling.modules.roi_pool import _RoIPooling
-from model.roi_crop.modules.roi_crop import _RoICrop
-from model.roi_align.modules.roi_align import RoIAlignAvg
-from model.rpn.proposal_target_layer_cascade import _ProposalTargetLayer
+#from model.rpn.rpn import _RPN
+#from model.roi_pooling.modules.roi_pool import _RoIPooling
+#from model.roi_crop.modules.roi_crop import _RoICrop
+#from model.roi_align.modules.roi_align import RoIAlignAvg
+#from model.rpn.proposal_target_layer_cascade import _ProposalTargetLayer
 import time
 import pdb
-from model.utils.net_utils import _smooth_l1_loss, _crop_pool_layer, _affine_grid_gen, _affine_theta
+#from model.utils.net_utils import _smooth_l1_loss, _crop_pool_layer, _affine_grid_gen, _affine_theta
 
 class _fasterRCNN(nn.Module):
     """ faster RCNN """
@@ -28,14 +28,15 @@ class _fasterRCNN(nn.Module):
         self.RCNN_loss_bbox = 0
 
         # define rpn
-        self.RCNN_rpn = _RPN(self.dout_base_model)
-        self.RCNN_proposal_target = _ProposalTargetLayer(self.n_classes)
-        self.RCNN_roi_pool = _RoIPooling(cfg.POOLING_SIZE, cfg.POOLING_SIZE, 1.0/16.0)
-        self.RCNN_roi_align = RoIAlignAvg(cfg.POOLING_SIZE, cfg.POOLING_SIZE, 1.0/16.0)
+        #self.RCNN_rpn = _RPN(self.dout_base_model)
+        #self.RCNN_proposal_target = _ProposalTargetLayer(self.n_classes)
+        #self.RCNN_roi_pool = _RoIPooling(cfg.POOLING_SIZE, cfg.POOLING_SIZE, 1.0/16.0)
+        #self.RCNN_roi_align = RoIAlignAvg(cfg.POOLING_SIZE, cfg.POOLING_SIZE, 1.0/16.0)
 
-        self.grid_size = cfg.POOLING_SIZE * 2 if cfg.CROP_RESIZE_WITH_MAX_POOL else cfg.POOLING_SIZE
-        self.RCNN_roi_crop = _RoICrop()
+        #self.grid_size = cfg.POOLING_SIZE * 2 if cfg.CROP_RESIZE_WITH_MAX_POOL else cfg.POOLING_SIZE
+        #self.RCNN_roi_crop = _RoICrop()
 
+    """
     def forward(self, im_data, im_info, gt_boxes, num_boxes):
         batch_size = im_data.size(0)
 
@@ -115,9 +116,9 @@ class _fasterRCNN(nn.Module):
 
     def _init_weights(self):
         def normal_init(m, mean, stddev, truncated=False):
-            """
+            \"\"\"
             weight initalizer: truncated normal and random normal.
-            """
+            \"\"\"
             # x is a parameter
             if truncated:
                 m.weight.data.normal_().fmod_(2).mul_(stddev).add_(mean) # not a perfect approximation
@@ -130,7 +131,8 @@ class _fasterRCNN(nn.Module):
         normal_init(self.RCNN_rpn.RPN_bbox_pred, 0, 0.01, cfg.TRAIN.TRUNCATED)
         normal_init(self.RCNN_cls_score, 0, 0.01, cfg.TRAIN.TRUNCATED)
         normal_init(self.RCNN_bbox_pred, 0, 0.001, cfg.TRAIN.TRUNCATED)
+    """
 
     def create_architecture(self):
         self._init_modules()
-        self._init_weights()
+        #self._init_weights()
