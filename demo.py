@@ -22,8 +22,8 @@ def get_frcnn_feature_extractor(path):
                        'cow', 'diningtable', 'dog', 'horse',
                        'motorbike', 'person', 'pottedplant',
                        'sheep', 'sofa', 'train', 'tvmonitor'])
-  fasterRCNN = vgg16(pascal_classes, pretrained=True)
-  fasterRCNN.create_architecture(path)
+  fasterRCNN = vgg16(pascal_classes, pretrained=True, path=path)
+  fasterRCNN.create_architecture()
   print('Loaded pre-trained Faster R-CNN model successfully!')
   print(fasterRCNN.RCNN_base[:10])
 
